@@ -50,7 +50,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   s.swift_version = '4.2'
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '10.0'
   s.author             = { "Muhammad Ahmed Baig" => "ahmedcs@live.com" }
   # Or just: s.author    = "Muhammad Ahmed Baig"
   # s.authors            = { "Muhammad Ahmed Baig" => "ahmed.baig@appiskey.com" }
@@ -89,10 +89,11 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "HelpersAndManagers/HelpersAndManagers/**/*.swift", "HelpersAndManagers/HelpersAndManagers/**/*.h"
+  s.source_files  = "HelpersAndManagers/ManagersAndHelpers/**/*.swift"
   s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
+
+  # , "HelpersAndManagers/HelpersAndManagers/**/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
