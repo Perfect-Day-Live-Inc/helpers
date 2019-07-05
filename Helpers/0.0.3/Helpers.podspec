@@ -50,7 +50,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   s.swift_version = '4.2'
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '10.0'
   s.author             = { "Muhammad Ahmed Baig" => "ahmedcs@live.com" }
   # Or just: s.author    = "Muhammad Ahmed Baig"
   # s.authors            = { "Muhammad Ahmed Baig" => "ahmed.baig@appiskey.com" }
