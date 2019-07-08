@@ -17,9 +17,9 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 *  `rotateViewTo45Degree`
             This function is used to rotate view to from left to right 45 degrees.
             Usage:
-                ```
+```
                     Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, repeated: false)
-                ```
+```
 * `tanslateViewAnimation`
             This function is used to translate view with animation.
             Usage:
