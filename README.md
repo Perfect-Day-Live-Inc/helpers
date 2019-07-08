@@ -23,8 +23,9 @@ This library contains 10 helpers and extensions files which are can reduce alot 
                     Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, repeated: false)
 ```
 * `tanslateViewAnimation`
-            This function is used to translate view with animation.
-            Usage:
+
+    This function is used to translate view with animation.
+    Usage:
 ```
                     let finalFrame = CGRect.init(x: self.viewToAnimate.frame.origin.x,
                                          y: self.viewToAnimate.frame.origin.y - 50,
@@ -38,8 +39,9 @@ This library contains 10 helpers and extensions files which are can reduce alot 
                                                       duration: 3.0) 
 ```
 *  `rotateViewTo45Degree`
-            This function is used to scale view, note: x, y = 1 is equals to your current size of width, height and for final if you enter 2 then it will be multiple of your current width hieght scale.
-            Usage:
+
+    This function is used to scale view, note: x, y = 1 is equals to your current size of width, height and for final if you enter 2 then it will be multiple of your current width hieght scale.
+    Usage:
 ```
             Animations.shared().scaleViewAnimation(view: self.viewToAnimate,
                                                    scaleInitialX: 1,
