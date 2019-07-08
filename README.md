@@ -36,7 +36,16 @@ This library contains 10 helpers and extensions files which are can reduce alot 
                                                       duration: 3.0) 
 ```
 *  `rotateViewTo45Degree`
-            This function is used to rotate view to from left to right 45 degrees.
+            This function is used to scale view, note: x, y = 1 is equals to your current size of width, height and for final if you enter 2 then it will be multiple of your current width hieght scale.
             Usage:
-                `Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, repeated: false)`
+```
+            Animations.shared().scaleViewAnimation(view: self.viewToAnimate,
+                                                   scaleInitialX: 1,
+                                                   scaleFinalX: 2,
+                                                   scaleInitialY: 1,
+                                                   scaleFinalY: 2,
+                                                   initalAlpha: 1.0,
+                                                   finalAlpha: 0.5,
+                                                   duration: 4.0)
+```
                                                       
