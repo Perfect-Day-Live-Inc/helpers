@@ -14,26 +14,28 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 
 1. **CommonAnimations** 
     This file contains simple animations which can use on any view to animate.
-    *  `rotateViewTo45Degree`
+*  `rotateViewTo45Degree`
             This function is used to rotate view to from left to right 45 degrees.
             Usage:
-                `Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, repeated: false)`
-    *  `tanslateViewAnimation`
+                ```
+                    Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, repeated: false)
+                ```
+* `tanslateViewAnimation`
             This function is used to translate view with animation.
             Usage:
 ```
-                    let finalFrame = CGRect.init(x: self.yellowView.frame.origin.x,
-                                         y: self.yellowView.frame.origin.y - 50,
-                                         width: self.yellowView.frame.width,
-                                         height: self.yellowView.frame.height)
-                Animations.shared().tanslateViewAnimation(view: self.yellowView,
+                    let finalFrame = CGRect.init(x: self.viewToAnimate.frame.origin.x,
+                                         y: self.viewToAnimate.frame.origin.y - 50,
+                                         width: self.viewToAnimate.frame.width,
+                                         height: self.viewToAnimate.frame.height)
+                Animations.shared().tanslateViewAnimation(view: self.viewToAnimate,
                                                       finalFrame: finalFrame,
-                                                      initalFrame: self.yellowView.frame,
+                                                      initalFrame: self.viewToAnimate.frame,
                                                       initalAlpha: 1.0,
                                                       finalAlpha: 0.5,
                                                       duration: 3.0) 
 ```
-    *  `rotateViewTo45Degree`
+*  `rotateViewTo45Degree`
             This function is used to rotate view to from left to right 45 degrees.
             Usage:
                 `Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, repeated: false)`
