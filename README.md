@@ -16,7 +16,7 @@ This library contains 10 helpers and extensions files which are can reduce alot 
  
     This file contains simple animations which can use on any view to animate.
 *  `rotateViewTo45Degree`
->  
+
     This function is used to rotate view to from left to right 45 degrees.
             Usage:
 ```
