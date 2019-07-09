@@ -83,9 +83,19 @@ This library contains 10 helpers and extensions files which are can reduce alot 
     Usage:
 ```
     Animations.shared().bounceAnimationToView(viewToAnimate: self.viewToAnimate,
-                                          bouncingY: -50,
-                                          initialAlpha: 0.2,
-                                          finalAlpha: 1.0,
-                                          completion: nil)
+                                             bouncingY: -50,
+                                             initialAlpha: 0.2,
+                                             finalAlpha: 1.0,
+                                             completion: nil)
+```
+*  `setHideProperty`
+
+    This function is will hide view with smothe animation.
+    
+    Usage:
+```
+    Animations.shared().setHideProperty(view: self.viewToAnimate,
+                                        hidden: true)
+
 ```
                                                       
