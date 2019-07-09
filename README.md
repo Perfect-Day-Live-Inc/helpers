@@ -98,4 +98,21 @@ This library contains 10 helpers and extensions files which are can reduce alot 
                                         hidden: true)
 
 ```
+*  `fadeOut/fadeIn`
+
+    This function is use to fadeIn or fadeOut animation for view hide and show.
+    
+    Usage:
+```
+    Animations.shared().fadeOut(view: self.viewToAnimate,
+                                duration: 2,
+                                delay: 0.4,
+                                completion: { (success) in })
+                                
+                                
+    Animations.shared().fadeIn(view: self.viewToAnimate,
+                               duration: 2,
+                               delay: 0.4,
+                               completion: { (success) in })
+```
                                                       
