@@ -18,6 +18,7 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 *  `rotateViewTo45Degree`
 
     This function is used to rotate view to from left to right 45 degrees.
+    
     Usage:
 ```
     Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, 
@@ -26,6 +27,7 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 * `tanslateViewAnimation`
 
     This function is used to translate view with animation.
+    
     Usage:
 ```
     let finalFrame = CGRect.init(x: self.viewToAnimate.frame.origin.x,
@@ -42,6 +44,7 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 *  `scaleViewAnimation`
 
     This function is used to scale view, note: x, y = 1 is equals to your current size of width, height and for final if you enter 2 then it will be multiple of your current width height scale.
+    
     Usage:
 ```
     Animations.shared().scaleViewAnimation(view: self.viewToAnimate,
@@ -56,15 +59,27 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 
 *  `translateAndScaleView`
 
-    This function is used to translate and scale view, here scale is multiple of view's existing widht/ height. You can use completion handler if you want to do some work after completions
+    This function is used to translate and scale view, here scale is multiple of view's existing widht/ height. You can use completion handler if you want to do some work after completions.
+    
     Usage:
 ```
-            
     Animations.shared().translateAndScaleView(viewToAnimate: self.viewToAnimate,
                                               scaleX: 1.2,
                                               scaleY: 1.2,
                                               translationX: 0,
                                               translationY: self.viewToAnimate.frame.origin.y - 50,
                                               completion: nil)
+```
+*  `bounceAnimationToView`
+
+    This function is will bounce view, here in bouncingY's negative value will bounce view in upward direction and positive value will bounce view in downward direction.
+    
+    Usage:
+```
+    Animations.shared().bounceAnimationToView(viewToAnimate: self.viewToAnimate,
+                                          bouncingY: -50,
+                                          initialAlpha: 0.2,
+                                          finalAlpha: 1.0,
+                                          completion: nil)
 ```
                                                       
