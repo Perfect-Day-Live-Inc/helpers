@@ -43,7 +43,9 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 ```
 *  `scaleViewAnimation`
 
-    This function is used to scale view, note: x, y = 1 is equals to your current size of width, height and for final if you enter 2 then it will be multiple of your current width height scale.
+    This function is used to scale view, 
+    
+    here x, y = 1 is equals to your current size of width, height and for final if you enter 2 then it will be multiple of your current width height scale.
     
     Usage:
 ```
@@ -59,7 +61,9 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 
 *  `translateAndScaleView`
 
-    This function is used to translate and scale view, here scale is multiple of view's existing widht/ height. You can use completion handler if you want to do some work after completions.
+    This function is used to translate and scale view, 
+    
+    here scale is multiple of view's existing widht/ height. You can use completion handler if you want to do some work after completions.
     
     Usage:
 ```
@@ -72,7 +76,9 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 ```
 *  `bounceAnimationToView`
 
-    This function is will bounce view, here in bouncingY's negative value will bounce view in upward direction and positive value will bounce view in downward direction.
+    This function is will bounce view and also allow to change view transparency during bouncing. 
+    
+    here in bouncingY's negative value will bounce view in upward direction and positive value will bounce view in downward direction.
     
     Usage:
 ```
