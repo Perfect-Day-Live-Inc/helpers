@@ -116,4 +116,49 @@ This library contains 10 helpers and extensions files which are can reduce alot 
                                delay: 0.4,
                                completion: { (success) in })
 ```
+
+1. **AudioManager** 
+
+    This Manager contains all common audio operations which any will require in any app. such as: Audio Recording, Audio Downloading, Play Audio from URL, Play Audio from Local.
+    
+    Usage:
+    
+*   To record audio:
+```
+    AudioManager.getInstance().recordAudio()
+```
+
+*   To stop recording:
+```
+    AudioManager.getInstance().finishRecording(success: true) { (url) in
+        //this is the local url where your app's audio is record.
+    }
+```
+
+*    To download audio:
+```
+    AudioManager.getInstance().downloadFile(from: url, completion: { (isSuccess, data) in
+        if isSuccess{
+            //data of downloaded audio
+        }
+    })
+```
+
+*   Play audio from local URL:
+```
+    AudioManager.getInstance().playAudioFromLocal(url: url)
+```
+
+*   Play audio from URL:
+```
+    AudioManager.getInstance().downloadAndPlayAudio(url: url)
+```
+
+*    Play audio from data:
+```
+    AudioManager.getInstance().playAudioFromData(data: data!)
+```
+
+for more features explore more...
+
                                                       
