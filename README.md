@@ -15,14 +15,15 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 1. **CommonAnimations** 
  
     This file contains simple animations which can use on any view to animate.
-*  `rotateViewTo45Degree`
+*  `animateViewToAngle`
 
-    This function is used to rotate view to from left to right 45 degrees.
+    This function is used to rotate view to from left to right in 45, 90, 135 or 180 degrees.
     
     Usage:
 ```
-    Animations.shared().rotateViewTo45Degree(viewToRotate: self.viewToAnimate, 
-                                             repeated: false)
+    Animations.shared().animateViewToAngle(viewToRotate: self.viewToAnimate,
+                                                   angle: .Deg135,
+                                                   repeated: false)
 ```
 * `tanslateViewAnimation`
 
