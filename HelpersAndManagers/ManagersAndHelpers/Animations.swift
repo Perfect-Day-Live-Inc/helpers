@@ -15,21 +15,38 @@ open class Animations {
     private static let instanceOfClass = Animations()
     static public func shared() -> Animations { return instanceOfClass  }
     
-    public func rotateViewTo45Degree(viewToRotate view: UIView) {
+    public enum RotationAngle{
+        case Deg45
+        case Deg90
+        case Deg135
+        case Deg180
+    }
+    
+    public func animateViewToAngle(viewToRotate view: UIView, angle: RotationAngle, repeated: Bool) {
         let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotation.fromValue = NSNumber(value: 0.0)
-        rotation.toValue = NSNumber(value: Double.pi / 4)
+        let piFactor = Double.pi / 180
+        switch angle {
+        case .Deg45:
+            rotation.toValue = NSNumber(value: piFactor * 45)
+        case .Deg90:
+            rotation.toValue = NSNumber(value: piFactor * 95)
+        case .Deg135:
+            rotation.toValue = NSNumber(value: piFactor * 135)
+        default:
+            rotation.toValue = NSNumber(value: piFactor * 180)
+        }
         rotation.duration = 4.0
-        rotation.repeatCount = Float.greatestFiniteMagnitude
+        rotation.repeatCount = (repeated) ? Float.greatestFiniteMagnitude : 0
         view.layer.add(rotation, forKey: "rotationAnimation")
     }
     
     public func tanslateViewAnimation(view: UIView,
-                              finalFrame: CGRect,
-                              initalFrame: CGRect,
-                              initalAlpha: CGFloat,
-                              finalAlpha: CGFloat,
-                              duration: TimeInterval)
+                                      finalFrame: CGRect,
+                                      initalFrame: CGRect,
+                                      initalAlpha: CGFloat,
+                                      finalAlpha: CGFloat,
+                                      duration: TimeInterval)
     {
         view.alpha = initalAlpha
         view.frame = initalFrame
@@ -43,13 +60,13 @@ open class Animations {
     }
     
     public func scaleViewAnimation(view: UIView,
-                           scaleInitialX: CGFloat,
-                           scaleFinalX: CGFloat,
-                           scaleInitialY: CGFloat,
-                           scaleFinalY: CGFloat,
-                           initalAlpha: CGFloat,
-                           finalAlpha: CGFloat,
-                           duration: TimeInterval)
+                                   scaleInitialX: CGFloat,
+                                   scaleFinalX: CGFloat,
+                                   scaleInitialY: CGFloat,
+                                   scaleFinalY: CGFloat,
+                                   initalAlpha: CGFloat,
+                                   finalAlpha: CGFloat,
+                                   duration: TimeInterval)
     {
         view.alpha = initalAlpha
         let initalScale = CGAffineTransform(scaleX: scaleInitialX, y: scaleInitialY)
@@ -61,7 +78,7 @@ open class Animations {
         }
     }
     
-    public func translateAndThenScaleView(viewToAnimate: UIView, scaleX: CGFloat, scaleY: CGFloat, translationX: CGFloat, translationY: CGFloat, completion: (() -> Void)?){
+    public func translateAndScaleView(viewToAnimate: UIView, scaleX: CGFloat, scaleY: CGFloat, translationX: CGFloat, translationY: CGFloat, completion: (() -> Void)?){
         
         let originalTransform = viewToAnimate.transform
         let scaledTransform = originalTransform.translatedBy(x: translationX, y: translationY)
@@ -75,38 +92,22 @@ open class Animations {
         }
     }
     
-    
-    public func bounceAnimationToView(viewToAnimate: UIView, finalY: CGFloat, initalAnimationY: CGFloat, completion: (() -> Void)?){
+    public func bounceAnimationToView(viewToAnimate: UIView,
+                                      bouncingY: CGFloat,
+                                      initialAlpha: CGFloat=1.0,
+                                      finalAlpha: CGFloat=1.0,
+                                      completion: (() -> Void)?){
         
         let originalTransform = viewToAnimate.transform
-        var scaledTransform = originalTransform.translatedBy(x: 0.0, y: initalAnimationY)
+        var scaledTransform = originalTransform.translatedBy(x: 0.0, y: bouncingY)
         UIView.animate(withDuration: 0.2, animations: {
             viewToAnimate.transform = scaledTransform
+            viewToAnimate.alpha = initialAlpha
         }) { (isSuccess) in
-            scaledTransform = originalTransform.translatedBy(x: 0.0, y: finalY)
+            scaledTransform = originalTransform.translatedBy(x: 0.0, y: 0.0)
             UIView.animate(withDuration: 0.2, animations: {
                 viewToAnimate.transform = scaledTransform
-            }) { (isSuccess) in
-                
-                if completion != nil{
-                    completion!()
-                }
-            }
-        }
-    }
-    
-    public func bounceAnimationToViewWithTransprancy(viewToAnimate: UIView, finalY: CGFloat, initalAnimationY: CGFloat, completion: (() -> Void)?){
-        
-        let originalTransform = viewToAnimate.transform
-        var scaledTransform = originalTransform.translatedBy(x: 0.0, y: initalAnimationY)
-        UIView.animate(withDuration: 0.2, animations: {
-            viewToAnimate.transform = scaledTransform
-            viewToAnimate.alpha = 0.5
-        }) { (isSuccess) in
-            scaledTransform = originalTransform.translatedBy(x: 0.0, y: finalY)
-            UIView.animate(withDuration: 0.2, animations: {
-                viewToAnimate.transform = scaledTransform
-                viewToAnimate.alpha = 1.0
+                viewToAnimate.alpha = finalAlpha
             }) { (isSuccess) in
                 
                 if completion != nil{
@@ -121,7 +122,8 @@ open class Animations {
     ///
     /// - Parameter view: VIEW TO HIDE
     /// - Parameter hidden: HIDDEN STATUS BOOL
-    public func setView(view: UIView, hidden: Bool) {
+    public func setHideProperty(view: UIView,
+                                hidden: Bool) {
         UIView.transition(with: view, duration: 0.7, options: .transitionCrossDissolve, animations: {
             view.isHidden = hidden
         })
@@ -131,7 +133,10 @@ open class Animations {
     ///
     /// - Parameter view: VIEW TO FADE
     /// - Returns: RETURN FINISHES COMPLETION
-    public func fadeIn(view: UIView, duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in }) {
+    public func fadeIn(view: UIView,
+                       duration: TimeInterval = 0.5,
+                       delay: TimeInterval = 0.0,
+                       completion: @escaping ((Bool) -> Void)) {
         view.alpha = 0.0
         
         UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
@@ -144,7 +149,10 @@ open class Animations {
     ///
     /// - Parameter view: VIEW TO FADE
     /// - Returns: RETURN FINISHES COMPLETION
-    public func fadeOut(view: UIView, duration: TimeInterval = 0.5, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in }) {
+    public func fadeOut(view: UIView,
+                        duration: TimeInterval = 0.5,
+                        delay: TimeInterval = 0.0,
+                        completion: @escaping ((Bool) -> Void)) {
         view.alpha = 1.0
         
         UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {

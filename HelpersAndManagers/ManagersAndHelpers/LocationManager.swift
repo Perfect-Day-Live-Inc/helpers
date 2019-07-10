@@ -12,7 +12,7 @@ import UIKit
 
 
 public enum LocationAuthorization{
-    case requestWhenInUse
+    case requestOnce
     case requestAlways
 }
 
@@ -41,10 +41,12 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     private static let manager = CLLocationManager()
     public var delegate : LocationManagerDelegate?
     
-    public var managerStatus : LocationAuthorization = .requestWhenInUse
+    public var managerStatus : LocationAuthorization = .requestOnce
     
     private static var currentLocation : CLLocation?
     private static var currentLocationAddress = ""
+    
+    private var addressRequired = false
     
     ///"private" function to get Permissions of locations from user
     private func settingDelegateToSelf(){
@@ -52,9 +54,9 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     }
     
     public func settingLocation(authorizationStatus: LocationAuthorization){
-        if authorizationStatus == .requestWhenInUse{
+        if authorizationStatus == .requestOnce{
             // Request when-in-use authorization initially
-            managerStatus = .requestWhenInUse
+            managerStatus = .requestOnce
         }else if authorizationStatus == .requestAlways{
             // Request always-use authorization initially
             managerStatus = .requestAlways
@@ -63,10 +65,16 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     
     /**
      This function is use to get current Location of user
-    **/
-    public func gettingLocation(delegateVC: LocationManagerDelegate?=nil){
+     **/
+    public func gettingLocation(delegateVC: LocationManagerDelegate?=nil, managerStatus: LocationAuthorization? = nil){
+        
+        if managerStatus != nil{
+            self.managerStatus = managerStatus!
+        }
         LocationManager.currentLocation = LocationManager.manager.location
-        self.delegate = delegateVC
+        if delegateVC != nil{
+            self.delegate = delegateVC
+        }
         
         let authorizationStatus = CLLocationManager.authorizationStatus()
         switch authorizationStatus {
@@ -127,7 +135,14 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
         if locations.count != 0{
             let location = locations.last
             LocationManager.currentLocation = location
-            self.getAddressFromLatLong(location: location!)
+            if self.addressRequired {
+                self.getAddressFromLatLong(location: location!)
+            } else {
+                self.delegate!.locationUpdate(latitude: location!.coordinate.latitude,
+                                              longitude: location!.coordinate.longitude,
+                                              address: "")
+            }
+            
         }
     }
     
