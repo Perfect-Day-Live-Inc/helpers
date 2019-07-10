@@ -56,6 +56,7 @@ open class Helper{
                                   isTransparent: Bool=false,
                                   isBottomLine: Bool=false,
                                   titleView: UIView?=nil,
+                                  backgroundColor: UIColor=UIColor.white,
                                   itemsColor: UIColor=UIColor.white,
                                   titleFontStyle: UIFont?=nil,
                                   itemsFontStyle: UIFont?=nil,
@@ -91,8 +92,8 @@ open class Helper{
         
         if !isTransparent{
             //
-            vc.navigationController?.navigationBar.barTintColor = UIColor.white//color
-            vc.navigationController?.navigationBar.backgroundColor = UIColor.white//.getDarkBlueColor//color
+            vc.navigationController?.navigationBar.barTintColor = backgroundColor
+            vc.navigationController?.navigationBar.backgroundColor = backgroundColor
             vc.navigationController?.navigationBar.isTranslucent = false
             if !isBottomLine{
                 vc.navigationController?.navigationBar.shadowImage = UIImage()
