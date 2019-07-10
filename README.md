@@ -123,19 +123,19 @@ This library contains 10 helpers and extensions files which are can reduce alot 
     
     Usage:
     
-*   To record audio:
+*   `To record audio`
 ```
     AudioManager.getInstance().recordAudio()
 ```
 
-*   To stop recording:
+*   `To stop recording`
 ```
     AudioManager.getInstance().finishRecording(success: true) { (url) in
         //this is the local url where your app's audio is record.
     }
 ```
 
-*    To download audio:
+*   `To download audio`
 ```
     AudioManager.getInstance().downloadFile(from: url, completion: { (isSuccess, data) in
         if isSuccess{
@@ -144,17 +144,17 @@ This library contains 10 helpers and extensions files which are can reduce alot 
     })
 ```
 
-*   Play audio from local URL:
+*   `Play audio from local URL`
 ```
     AudioManager.getInstance().playAudioFromLocal(url: url)
 ```
 
-*   Play audio from URL:
+*   `Play audio from URL`
 ```
     AudioManager.getInstance().downloadAndPlayAudio(url: url)
 ```
 
-*    Play audio from data:
+*    `Play audio from data`
 ```
     AudioManager.getInstance().playAudioFromData(data: data!)
 ```
