@@ -96,8 +96,7 @@ open class AudioManager : NSObject{
             audioRecorder.delegate = self
             audioRecorder.prepareToRecord()
         } catch {
-            self.finishRecording(success: false, completion: { (url) in
-            })
+            self.finishRecording(completion: { (url) in })
         }
         do {
             try audioSession.setActive(true)
@@ -106,24 +105,17 @@ open class AudioManager : NSObject{
         }
     }
     
-    public func finishRecording(success: Bool, completion: @escaping (URL?)->Void) {
+    public func finishRecording(completion: @escaping (URL?)->Void) {
         if audioRecorder != nil{
             audioRecorder.stop()
         }
-        if success {
-            print(success)
-            if audioRecorder != nil{
-                completion(audioRecorder.url)
-            }
-            audioRecorder = nil
-        } else {
-            audioRecorder = nil
-            print("Somthing Wrong.")
-            completion(nil)
+        if audioRecorder != nil{
+            completion(audioRecorder.url)
         }
+        audioRecorder = nil
     }
     
-    public func playAudio(url: URL){
+    public func playAudioFromLocal(url: URL){
         if self.audioPlayer == nil {
             self.stopAndClearSession()
             do {
@@ -192,6 +184,20 @@ open class AudioManager : NSObject{
             
         })
         currentDownloadTask?.resume()
+    }
+    
+    public func downloadAndPlayAudio(url: URL){
+        DispatchQueue.global(qos: .background).async {
+            self.downloadFile(from: url, completion: { (isSuccess, data) in
+                if isSuccess{
+                    if data != nil{
+                        DispatchQueue.main.async {
+                            self.playAudioFromData(data: data!)
+                        }
+                    }
+                }
+            })
+        }
     }
     
     private func IsHeadSetConnected() -> Bool{
