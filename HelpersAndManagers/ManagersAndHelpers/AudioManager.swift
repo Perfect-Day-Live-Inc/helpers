@@ -259,8 +259,8 @@ open class AudioManager : NSObject{
 extension AudioManager : AVAudioRecorderDelegate{
     public func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
-            self.finishRecording(success: true, completion: { (url) in
-            })
+            self.finishRecording { (url) in
+            }
         }
     }
 }
