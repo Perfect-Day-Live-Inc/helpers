@@ -117,7 +117,7 @@ This library contains 10 helpers and extensions files which are can reduce alot 
                                completion: { (success) in })
 ```
 
-1. **AudioManager** 
+2. **AudioManager** 
 
     This Manager contains all common audio operations which any will require in any app. such as: Audio Recording, Audio Downloading, Play Audio from URL, Play Audio from Local.
     
@@ -130,7 +130,7 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 
 *   `To stop recording`
 ```
-    AudioManager.getInstance().finishRecording(success: true) { (url) in
+    AudioManager.getInstance().finishRecording { (url) in
         //this is the local url where your app's audio is record.
     }
 ```
@@ -161,4 +161,11 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 
 for more features explore more...
 
+3. **DateTimePicker** 
+
+    This component is use to pick and time using default UIPickerView.
+    
+    Usage:
+
+                          
                                                       
