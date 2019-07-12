@@ -10,17 +10,16 @@ import UIKit
 
 
 public protocol DatePickerDelegate {
-    func timePicked(time: Date, index: Int, isDatePicker: Bool)
+    func timePicked(time: Date, isDatePicker: Bool)
 }
 
-class DatePickerManager{
+open class DatePickerManager{
     static public let getInstance = DatePickerManager()
     private init(){}
     public var datePickerDelegate : DatePickerDelegate?
     
     ///show date time picker
     public func showDateTimePicker(fromVC : UIViewController,
-                                    index: Int,
                                     isDatePicker: Bool?=false,
                                     tintColor: UIColor,
                                     minimumDate : Date?=Date(),
@@ -50,7 +49,7 @@ class DatePickerManager{
         alertCont.setValue(vc, forKey: "contentViewController")
         let setAction = UIAlertAction(title: "Select", style: .default) { (action) in
             if self.datePickerDelegate != nil{
-                self.datePickerDelegate!.timePicked(time: pickerView.date, index: index, isDatePicker: isDatePicker!)
+                self.datePickerDelegate!.timePicked(time: pickerView.date, isDatePicker: isDatePicker!)
             }
         }
         alertCont.addAction(setAction)
