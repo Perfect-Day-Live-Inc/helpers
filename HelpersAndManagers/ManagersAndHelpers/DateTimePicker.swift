@@ -27,15 +27,17 @@ open class DateTimePicker{
     ///show date time picker
     public func showDatePicker(fromVC : UIViewController,
                                tintColor: UIColor,
-                               minimumDate : Date?=Date(),
-                               selectedDateTime: Date?=nil,
+                               minimumDate : Date,
+                               maximumDate : Date?=Date(),
+                               selectedDate: Date?=nil,
                                completion: ((Date?)->Void)?){
         
         self.settingAndShowPicker(fromVC: fromVC,
                                   pickerType: .Date,
                                   tintColor: tintColor,
                                   minimumDate: minimumDate,
-                                  selectedDateTime: selectedDateTime) { (date) in
+                                  maximumDate: maximumDate,
+                                  selectedDateTime: selectedDate) { (date) in
                                     if completion != nil{
                                         completion!(date)
                                     }
@@ -46,15 +48,17 @@ open class DateTimePicker{
     ///show date time picker
     public func showTimePicker(fromVC : UIViewController,
                                tintColor: UIColor,
-                               minimumDate : Date?=Date(),
-                               selectedDateTime: Date?=nil,
+                               minimumTime : Date,
+                               maximumTime : Date?=Date(),
+                               selectedTime: Date?=nil,
                                completion: ((Date?)->Void)?){
         
         self.settingAndShowPicker(fromVC: fromVC,
                                   pickerType: .Time,
                                   tintColor: tintColor,
-                                  minimumDate: minimumDate,
-                                  selectedDateTime: selectedDateTime) { (date) in
+                                  minimumDate: minimumTime,
+                                  maximumDate: maximumTime,
+                                  selectedDateTime: selectedTime) { (date) in
                                     if completion != nil{
                                         completion!(date)
                                     }
@@ -66,7 +70,8 @@ open class DateTimePicker{
     private func settingAndShowPicker(fromVC : UIViewController,
                                       pickerType: PickerType=PickerType.Date,
                                       tintColor: UIColor,
-                                      minimumDate : Date?=Date(),
+                                      minimumDate : Date,
+                                      maximumDate : Date?=Date(),
                                       selectedDateTime: Date?=nil,
                                       completion: ((Date?)->Void)?){
         
@@ -83,11 +88,13 @@ open class DateTimePicker{
         }
         if pickerType == .Date{
             pickerView.datePickerMode = .date
-            pickerView.minimumDate = minimumDate
             alertCont = UIAlertController(title: "Choose Date",
                                           message: "",
                                           preferredStyle: UIAlertController.Style.alert)
         }
+        pickerView.minimumDate = minimumDate
+        pickerView.maximumDate = maximumDate
+        
         pickerView.locale = NSLocale(localeIdentifier: "\(Formatter.getInstance.getAppTimeFormat().rawValue)") as Locale
         
         vc.view.addSubview(pickerView)

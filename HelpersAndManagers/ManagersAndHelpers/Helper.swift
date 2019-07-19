@@ -100,7 +100,6 @@ open class Helper{
                 vc.navigationController?.navigationBar.shadowImage = UIColor(red: 214/255, green: 214/255, blue: 214/255, alpha: 1.0).as1ptImage()
             }
         }else{
-            vc.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             vc.navigationController?.navigationBar.barTintColor = UIColor.clear//color
             vc.navigationController?.navigationBar.backgroundColor = UIColor.clear//.getDarkBlueColor//color
             vc.navigationController?.navigationBar.isTranslucent = true
