@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Helpers"
-  s.version      = "0.0.9"
+  s.version      = "0.0.5"
   s.summary      = "A short description of Helpers. and i will use these file for my new projects."
 
   # This description is used to generate tags and improve search results.
