@@ -65,12 +65,12 @@ open class Helper{
                                   vc: UIViewController){
         
         var font = UIFont.systemFont(ofSize: 17)
-        if titleFontStyle == nil{
+        if titleFontStyle != nil{
             font = titleFontStyle!
         }
         
         var itemsFont = UIFont.systemFont(ofSize: 17)
-        if itemsFontStyle == nil{
+        if itemsFontStyle != nil{
             itemsFont = itemsFontStyle!
         }
         
