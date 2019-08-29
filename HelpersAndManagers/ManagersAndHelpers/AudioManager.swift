@@ -63,13 +63,15 @@ open class AudioManager : NSObject{
         ]
     }
     
-    func directoryURL() -> NSURL? {
+    func directoryURL() -> URL? {
         let fileManager = FileManager.default
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = urls[0] as NSURL
-        let soundURL = documentDirectory.appendingPathComponent("sound.aac")
+        var randomString = UUID().uuidString
+        randomString = randomString.replacingOccurrences(of: "-", with: "")
+        let soundURL = documentDirectory.appendingPathComponent("\(randomString).aac")
         print(soundURL ?? "")
-        return soundURL as NSURL?
+        return soundURL
     }
     
     public func stopAndClearSession(){
@@ -79,7 +81,7 @@ open class AudioManager : NSObject{
         self.recordingSession = nil
         self.audioRecorder = nil
         self.audioPlayer = nil
-            
+        
     }
     
     public func pauseSession(){
@@ -91,7 +93,7 @@ open class AudioManager : NSObject{
     private func startRecording() {
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            audioRecorder = try AVAudioRecorder(url: self.directoryURL()! as URL,
+            audioRecorder = try AVAudioRecorder(url: self.directoryURL()!,
                                                 settings: settings)
             audioRecorder.delegate = self
             audioRecorder.prepareToRecord()
@@ -116,7 +118,7 @@ open class AudioManager : NSObject{
     }
     
     public func playAudioFromLocal(url: URL){
-        if self.audioPlayer == nil {
+        if self.audioPlayer == nil || self.audioPlayer?.url != url{
             self.stopAndClearSession()
             do {
                 self.audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -135,7 +137,7 @@ open class AudioManager : NSObject{
             } catch {
                 print("failed to record!")
             }
-        
+            
         }else{
             self.audioPlayer!.play()
         }
@@ -176,8 +178,8 @@ open class AudioManager : NSObject{
         // if the file doesn't exist than downloading
         currentDownloadTask = URLSession.shared.dataTask(with: urlString, completionHandler: { (data, response, error) in
             guard let data = data, error == nil else {
-                  completion(false, nil)
-                  return
+                completion(false, nil)
+                return
             }
             // you can use the data! here
             completion(true, data)
