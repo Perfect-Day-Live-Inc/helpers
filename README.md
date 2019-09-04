@@ -159,13 +159,62 @@ This library contains 10 helpers and extensions files which are can reduce alot 
     AudioManager.getInstance().playAudioFromData(data: data!)
 ```
 
+*    `Stop audio and clear cache`
+```
+    AudioManager.getInstance().stopAndClearSession()
+```
+
 for more features explore more...
 
 3. **DateTimePicker** 
 
     This component is use to pick and time using default UIPickerView.
     
-    Usage:
+*   `show DatePicker`
 
+    if maximumDate is not given in argument than it will consider as current date.
+    
+    Usage:
+```
+    guard let minimumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date()) else{
+        return
+    }
+    guard let maximumDate = Calendar.current.date(byAdding: .year, value: -4, to: Date()) else{
+        return
+    }
+    DateTimePicker.getInstance.showDatePicker(fromVC: self,
+                                              tintColor: .blue,
+                                              minimumDate: minimumDate,
+                                              maximumDate: maximumDate,
+                                              selectedDate: nil) { (date) in
+                                                if date != nil{
+                                                    print(date)
+                                                }
+    }
+```
+
+*   `show TimePicker`
+
+    if maximumTime is not given in argument than it will consider as current time.
+    
+    Usage:
+```
+    guard let minimumDate = Calendar.current.date(bySettingHour: 00, minute: 00, second: 00, of: Date()) else{
+        return
+    }
+        
+    let maximumDate = Date()
+        
+    DateTimePicker.getInstance.showTimePicker(fromVC: self,
+                                              tintColor: .blue,
+                                              minimumTime: minimumDate,
+                                              maximumTime: maximumDate,
+                                              selectedTime: nil) { (date) in
+                                                if date != nil{
+                                                    print(date)
+                                                }
+    }
+        
+```
                           
                                                       
