@@ -34,6 +34,7 @@ open class Formatter{
         case onlyYearAndMonthFirstYear = "yyyy-MM"
         case onlyYearAndMonthFirstMonth = "MMMM yyyy"
         case monthThenDayThenYearAndTime = "MMM d, yyyy | hh:mm a"
+        case dayOfWeek = "EEEE"
     }
     
     private var appTimeFormat : timeFormat = .Hrs24
@@ -115,6 +116,16 @@ open class Formatter{
         formatter.timeZone = TimeZone.current
         return formatter
     }
+    
+    ///this function returns time format "May"
+    /// - Returns: Date Formatter
+    public func getDayOfWeek() -> DateFormatter{
+        let formatter = DateFormatter()
+        formatter.dateFormat = DateFormatsForApp.dayOfWeek.rawValue
+        formatter.timeZone = TimeZone.current
+        return formatter
+    }
+    
     ///this function returns time format "Jun 10, 2019 | 15:15 am"
     /// - Returns: Date Formatter
     public func monthThenDayThenYearAndTime() -> DateFormatter{
