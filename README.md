@@ -3,13 +3,13 @@ This library contains 10 helpers and extensions files which are can reduce alot 
 * CommonAnimations (some common animations)
 * AudioManager (to record, play and download)
 * DatePickerManager (to show date picker in alert)
+* TextfieldManager (to manager next, return keys for all textfields and textviews)
+* MailComposer (to compose mail)
+* LocationManager (to get and track user current location)
+* PhoneContacts (to fetch and return all contacts from phone)
 * Formatter (Custom date formatter which we use frequently)
 * Helper (All Utilities methods)
 * HelpfulExtensions (extension which contains many useful functions)
-* LocationManager (to get and track user current location)
-* MailComposer (to compose mail)
-* PhoneContacts (to fetch and return all contacts from phone)
-* TextfieldManager (to manager next, return keys for all textfields and textviews)
 
 
 1. **CommonAnimations** 
@@ -215,6 +215,24 @@ for more features explore more...
                                                 }
     }
         
+```
+
+4. **TextfieldManager** 
+
+    This is really helpful manager, we always need to make delegate of textfields and textviews so we will move to next or previous textfield on responder button. Even if you use great library IQKeyBoardManager (https://github.com/hackiftekhar/IQKeyboardManager), you need to make delegates and do some stuff on it to make those responder buttons usable.
+    This Manager helps you to automatically detect your next textfield and make 'Next', 'Done' button bydefault.
+    
+*   `setupTextFieldsOrTextViews`
+
+    to enable this helpful feature only call this function which takes two parameters 'textInputViewsArr' and 'isToolBarRequired'. 'textInputViewsArr' takes array of textfields and textviews orderwise (which should respond first then next til last). 'isToolBarRequired' if you want to show toolbar for on top of keyboard then make this 'true'.
+    
+    
+    Usage:
+```
+    TextFieldManager.instance.setupTextFieldsAndTextViews(textInputViewsArr: [YOUR_TEXTFIELD_NO_1,
+                                                                             YOUR_TEXTFIELD_NO_2,
+                                                                             YOUR_TEXTVIEW],
+                                                          isToolBarRequired:  true)
 ```
                           
                                                       
