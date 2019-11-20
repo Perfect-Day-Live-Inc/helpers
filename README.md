@@ -222,7 +222,7 @@ for more features explore more...
     This is really helpful manager, we always need to make delegate of textfields and textviews so we will move to next or previous textfield on responder button. Even if you use great library IQKeyBoardManager (https://github.com/hackiftekhar/IQKeyboardManager), you need to make delegates and do some stuff on it to make those responder buttons usable.
     This Manager helps you to automatically detect your next textfield and make 'Next', 'Done' button bydefault.
     
-*   `setupTextFieldsOrTextViews`
+*   `Setup TextFeilds and TextViews Responders`
 
     to enable this helpful feature only call this function which takes two parameters 'textInputViewsArr' and 'isToolBarRequired'. 'textInputViewsArr' takes array of textfields and textviews orderwise (which should respond first then next til last). 'isToolBarRequired' if you want to show toolbar for on top of keyboard then make this 'true'.
     
@@ -234,5 +234,32 @@ for more features explore more...
                                                                              YOUR_TEXTVIEW],
                                                           isToolBarRequired:  true)
 ```
-                          
+    That's all, now this TextfeildManager class will manage all of the stuff.
+
+
+4. **MailComposer** 
+
+      This Simple Component is use to send email to single or multiple receipt.
+    
+*   `Send Email`
+
+    In this function there are 4 parameters:
+    'recipients': recipients to send email.
+    'barTintColor': MailComposerViewController's NavigaitonBar tint Color.
+    'itemsColor': MailComposerViewController's items color.
+    'body': Body or Message which you want to share on email.
+    
+    Usage:
+```
+    
+    MailComposer.getInstance().sendEmail(recipients: ["alimaniar@gmail.com",
+                                                     "msalmanraza@gmail.com",
+                                                     "ashirjavedvayani@gmail.com",
+                                                     "ahmedcs@live.com"],
+                                         barTintColor: .blue,
+                                         itemsColor: .white,
+                                         body: "WRTIE EMAIL BODY MESSAGE HERE...")
+```
+    
+                 
                                                       
