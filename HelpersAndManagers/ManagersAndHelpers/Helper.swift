@@ -170,7 +170,7 @@ open class Helper{
             alertController.addAction(alertAction)
         }
         DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alertController, animated: true, completion: nil)
             }
         }
@@ -219,7 +219,7 @@ open class Helper{
         vc.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(vc, animated: true, completion: nil)
             }
         }
@@ -377,7 +377,7 @@ open class Helper{
         }
         alert.addAction(action)
         DispatchQueue.main.async{
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alert, animated: true, completion: nil)
             }
         }
@@ -397,7 +397,7 @@ open class Helper{
         alert.addAction(cancelaction)
         alert.addAction(action)
         DispatchQueue.main.async{
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alert, animated: true, completion: nil)
             }
         }

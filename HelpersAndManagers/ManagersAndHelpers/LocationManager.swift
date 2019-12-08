@@ -100,7 +100,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     
     
     ///show location disable alert
-    func showLocationSettingsAlert(){
+    public func showLocationSettingsAlert(){
         let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
         let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" Detect that your application's location setting is disable, Please enable location service for better results.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Go to settings", style: .default) { (action) in
@@ -109,7 +109,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
         }
         alert.addAction(action)
         DispatchQueue.main.async{
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alert, animated: true, completion: nil)
             }
         }

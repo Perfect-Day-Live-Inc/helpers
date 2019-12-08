@@ -18,7 +18,7 @@ open class TextFieldManager : NSObject{
     public var tintColor : UIColor = .blue
     public var backgroundColor : UIColor = .gray
     
-    public func createToolBar(isFirstField: Bool=false, isLastField: Bool=false) -> UIToolbar{
+    private func createToolBar(isFirstField: Bool=false, isLastField: Bool=false) -> UIToolbar{
         let toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0,
                                                         width: UIScreen.main.bounds.width,
                                                         height: 45))
@@ -59,7 +59,7 @@ open class TextFieldManager : NSObject{
     /// - Parameters:
     ///   - textInputViewsArr: ARRAY OF TEXTFIELDS/ TEXTVIEWS.
     ///   - isToolBarRequired: INDICATES IF TOOLBAR IN TOP OF KEYBOARD IS REQUIRED OR NOT.
-    public func setTextFieldsWithDelegate(textInputViewsArr: [UIResponder],
+    public func setupTextFieldsAndTextViews(textInputViewsArr: [UIResponder],
                                           isToolBarRequired: Bool?=nil){
         self.textInputViews = textInputViewsArr
         self.isToolBarRequired = (isToolBarRequired == nil) ? self.isToolBarRequired : isToolBarRequired!
@@ -96,7 +96,7 @@ open class TextFieldManager : NSObject{
         
     }
     
-    func convertResponderToTextInput(view: UIResponder) -> UITextInput{
+    private func convertResponderToTextInput(view: UIResponder) -> UITextInput{
         if view.isKind(of: UITextField.self){
             return view as! UITextField
         }else{
@@ -104,7 +104,7 @@ open class TextFieldManager : NSObject{
         }
     }
     
-    @objc func nextBtnTapped(){
+    @objc private func nextBtnTapped(){
         let currFieldIndex =  self.textInputViews.firstIndex { (field) -> Bool in
             return field.isFirstResponder
         }
@@ -122,7 +122,7 @@ open class TextFieldManager : NSObject{
                              isNextAction: true)
     }
     
-    func updateInputView(_ currFieldIndex: Int, isNextAction: Bool=true){
+    private func updateInputView(_ currFieldIndex: Int, isNextAction: Bool=true){
         
         var nextORPreviousIndex = currFieldIndex + 1
         if !isNextAction{
@@ -171,7 +171,7 @@ open class TextFieldManager : NSObject{
         }
     }
     
-    @objc func previousBtnTapped(){
+    @objc private func previousBtnTapped(){
         let currFieldIndex =  self.textInputViews.firstIndex { (field) -> Bool in
             return field.isFirstResponder
         }
@@ -188,7 +188,7 @@ open class TextFieldManager : NSObject{
                              isNextAction: false)
     }
     
-    @objc func TextFieldsUpdate(){
+    @objc private func TextFieldsUpdate(){
         self.nextBtnTapped()
     }
 }
