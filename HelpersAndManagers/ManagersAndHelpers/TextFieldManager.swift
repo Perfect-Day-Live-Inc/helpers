@@ -18,7 +18,8 @@ open class TextFieldManager : NSObject{
     public var tintColor : UIColor = .blue
     public var backgroundColor : UIColor = .gray
     
-    private func createToolBar(isFirstField: Bool=false, isLastField: Bool=false) -> UIToolbar{
+    private func createToolBar(isFirstField: Bool=false,
+                               isLastField: Bool=false) -> UIToolbar{
         let toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0,
                                                         width: UIScreen.main.bounds.width,
                                                         height: 45))

@@ -16,6 +16,11 @@ public enum LocationAuthorization{
     case requestAlways
 }
 
+public enum LocationRequirement{
+    case mandatory
+    case non_Mandatory
+}
+
 ///This Protocol is an delegation pattren implementation of "LocationManager" class
 public protocol LocationManagerDelegate {
     ///If location updates occurs this delegate will call
@@ -41,6 +46,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     private static let manager = CLLocationManager()
     public var delegate : LocationManagerDelegate?
     
+    public var locationRequirement : LocationRequirement = .non_Mandatory
     public var managerStatus : LocationAuthorization = .requestOnce
     
     private static var currentLocation : CLLocation?
@@ -98,16 +104,23 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
         LocationManager.manager.startUpdatingLocation()
     }
     
-    
     ///show location disable alert
-    public func showLocationSettingsAlert(){
-        let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
-        let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" Detect that your application's location setting is disable, Please enable location service for better results.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Go to settings", style: .default) { (action) in
+    func showLocationSettingsAlert(){
+        let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
+        let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" detects that your application's location setting is disable, Please enable location service for better results.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Go to Settings", style: .default) { (action) in
             Helper.getInstance.openAppSettings()
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
+        
+        if locationRequirement == .non_Mandatory{
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(cancelAction)
+        }
+        
         DispatchQueue.main.async{
             if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alert, animated: true, completion: nil)
