@@ -232,9 +232,9 @@ open class Formatter{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted date, it may contains nil value.
      */
-    static public func convertStringToDate(format: DateFormatsForApp, stringToConvert: String, isUTC: Bool=false) -> Date?{
+    static public func convertStringToDate(format: String, stringToConvert: String, isUTC: Bool=false) -> Date?{
         let formatter = DateFormatter()
-        formatter.dateFormat = format.rawValue
+        formatter.dateFormat = format
         if isUTC{
             formatter.timeZone = TimeZone(abbreviation: "UTC")
         }else{
@@ -255,9 +255,9 @@ open class Formatter{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string.
      */
-    static public func convertDateToString(format: DateFormatsForApp, dateToConvert: Date, isUTC: Bool=false) -> String{
+    static public func convertDateToString(format: String, dateToConvert: Date, isUTC: Bool=false) -> String{
         let formatter = DateFormatter()
-        formatter.dateFormat = format.rawValue
+        formatter.dateFormat = format
         if isUTC{
             formatter.timeZone = TimeZone(abbreviation: "UTC")
         }else{
@@ -274,10 +274,10 @@ open class Formatter{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string, it may contains nil value.
      */
-    static public func convertStringToViewableString(format: DateFormatsForApp, formatToShow: DateFormatsForApp, stringToConvert: String, isUTC: Bool=false) -> String?{
+    static public func convertStringToViewableString(format: String, formatToShow: String, stringToConvert: String, isUTC: Bool=false) -> String?{
         if let date = Formatter.convertStringToDate(format: format, stringToConvert: stringToConvert, isUTC: isUTC){
             let formatter = DateFormatter()
-            formatter.dateFormat = formatToShow.rawValue
+            formatter.dateFormat = formatToShow
             formatter.timeZone = TimeZone.current
             let strDate = formatter.string(from: date)
             return strDate
@@ -292,11 +292,11 @@ open class Formatter{
      - Parameter showableFormat: enum type DateFormatsForApp for date format which will viewable on screen
      - Returns: return converted string, it may contains nil value.
      */
-    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: DateFormatsForApp) -> String?{
+    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: String) -> String?{
         
-        if let date = Formatter.convertStringToDate(format: Formatter.DateFormatsForApp.utcDateTimeFormattor,
+        if let date = Formatter.convertStringToDate(format: Formatter.DateFormatsForApp.utcDateTimeFormattor.rawValue,
                                                     stringToConvert: string, isUTC: true){
-            let dateToShow = Formatter.convertStringToViewableString(format: Formatter.DateFormatsForApp.utcDateTimeFormattor,
+            let dateToShow = Formatter.convertStringToViewableString(format: Formatter.DateFormatsForApp.utcDateTimeFormattor.rawValue,
                                                                      formatToShow: showableFormat,
                                                                      stringToConvert: string) ?? ""
             let timeAgo = Formatter.timeAgoSinceDate(date: date,

@@ -262,7 +262,7 @@ extension CLLocation{
     }
     
     func bearingToLocationDegrees(destinationLocation:CLLocation) -> Double{
-        return   RadiansToDegrees(bearingToLocationRadian(destinationLocation))
+        return RadiansToDegrees(bearingToLocationRadian(destinationLocation))
     }
 }
 
