@@ -319,7 +319,7 @@ open class Helper{
         }else if calendar.isDateInTomorrow(date){
             return "Tomorrow"
         }else{
-            return Formatter.getInstance.dateTimeFormatterWithDay().string(from: date)
+            return DateFormatterHelper.getInstance.dateTimeFormatterWithDay().string(from: date)
         }
     }
     

@@ -16,31 +16,32 @@ public enum timeFormat : String{
     case Hrs24 = "en_GB"
 }
 
+public enum HelpfulDateFormats : String{
+    case dateFormattor = "d MMM yyyy"
+    case fullDateComaAndTime = "d MMM yyyy, hh:mm a"
+    case dateFormattorWithComma = "d MMM, yyyy"
+    case onlyDateFormattor = "yyyy-MM-dd"
+    case utcDateTimeFormattor = "yyyy-MM-dd HH:mm:ss"
+    case onlyTimeWithSecond = "HH:mm:ss"
+    case TimeFormattor12Hrs = "hh:mm a"
+    case TimeFormattor24Hrs = "HH:mm"
+    case dateTimeFormatterWithoutDay = "d MMM, HH:mm"
+    case dateTimeFormatterWithDay = "EEEE, MMM d, yyyy"
+    case monthThenDayThenYear = "MMM d, yyyy"
+    case onlyYearAndMonthFirstYear = "yyyy-MM"
+    case onlyYearAndMonthFirstMonth = "MMMM yyyy"
+    case monthThenDayThenYearAndTime = "MMM d, yyyy | hh:mm a"
+    case dayOfWeek = "EEEE"
+}
+
 ///this class contains time formats which are use in whole application
-open class Formatter{
+open class DateFormatterHelper{
     
-    public enum DateFormatsForApp : String{
-        case dateFormattor = "d MMM yyyy"
-        case fullDateComaAndTime = "d MMM yyyy, hh:mm a"
-        case dateFormattorWithComma = "d MMM, yyyy"
-        case onlyDateFormattor = "yyyy-MM-dd"
-        case utcDateTimeFormattor = "yyyy-MM-dd HH:mm:ss"
-        case onlyTimeWithSecond = "HH:mm:ss"
-        case TimeFormattor12Hrs = "hh:mm a"
-        case TimeFormattor24Hrs = "HH:mm"
-        case dateTimeFormatterWithoutDay = "d MMM, HH:mm"
-        case dateTimeFormatterWithDay = "EEEE, MMM d, yyyy"
-        case monthThenDayThenYear = "MMM d, yyyy"
-        case onlyYearAndMonthFirstYear = "yyyy-MM"
-        case onlyYearAndMonthFirstMonth = "MMMM yyyy"
-        case monthThenDayThenYearAndTime = "MMM d, yyyy | hh:mm a"
-        case dayOfWeek = "EEEE"
-    }
     
     private var appTimeFormat : timeFormat = .Hrs24
 
     private init() {}
-    static public let getInstance = Formatter()
+    static public let getInstance = DateFormatterHelper()
 
     ///this function change the whole app time format as 24 hrs or 12 hrs
     /// - Parameter format: timeformat
@@ -58,7 +59,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getOnlyTimeWithSecond() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.onlyTimeWithSecond.rawValue
+        formatter.dateFormat = HelpfulDateFormats.onlyTimeWithSecond.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -67,7 +68,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getfullDateComaAndTime() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.fullDateComaAndTime.rawValue
+        formatter.dateFormat = HelpfulDateFormats.fullDateComaAndTime.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -76,7 +77,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func onlyYearAndMonthFirstYear() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.onlyYearAndMonthFirstYear.rawValue
+        formatter.dateFormat = HelpfulDateFormats.onlyYearAndMonthFirstYear.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -85,7 +86,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func onlyYearAndMonthFirstMonth() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.onlyYearAndMonthFirstMonth.rawValue
+        formatter.dateFormat = HelpfulDateFormats.onlyYearAndMonthFirstMonth.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -94,7 +95,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getUTCDateTimeFormattor() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.utcDateTimeFormattor.rawValue
+        formatter.dateFormat = HelpfulDateFormats.utcDateTimeFormattor.rawValue
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         return formatter
     }
@@ -103,7 +104,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getOnlyDateFormattor() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.onlyDateFormattor.rawValue
+        formatter.dateFormat = HelpfulDateFormats.onlyDateFormattor.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -112,7 +113,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func monthThenDayThenYear() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.monthThenDayThenYear.rawValue
+        formatter.dateFormat = HelpfulDateFormats.monthThenDayThenYear.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -121,7 +122,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getDayOfWeek() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.dayOfWeek.rawValue
+        formatter.dateFormat = HelpfulDateFormats.dayOfWeek.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -130,7 +131,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func monthThenDayThenYearAndTime() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.monthThenDayThenYearAndTime.rawValue
+        formatter.dateFormat = HelpfulDateFormats.monthThenDayThenYearAndTime.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -139,7 +140,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func dateTimeFormatterWithDay() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.dateTimeFormatterWithDay.rawValue
+        formatter.dateFormat = HelpfulDateFormats.dateTimeFormatterWithDay.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -148,7 +149,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func get12HrsTimeFormattor() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.TimeFormattor12Hrs.rawValue
+        formatter.dateFormat = HelpfulDateFormats.TimeFormattor12Hrs.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -157,7 +158,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func get24HrsTimeFormattor() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.TimeFormattor24Hrs.rawValue
+        formatter.dateFormat = HelpfulDateFormats.TimeFormattor24Hrs.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -166,7 +167,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getAppDateFormattor() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.dateFormattor.rawValue
+        formatter.dateFormat = HelpfulDateFormats.dateFormattor.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -175,7 +176,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func getAppDateFormattorWithComma() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.dateFormattorWithComma.rawValue
+        formatter.dateFormat = HelpfulDateFormats.dateFormattorWithComma.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -184,7 +185,7 @@ open class Formatter{
     /// - Returns: Date Formatter
     public func dateTimeFormatterWithoutDay() -> DateFormatter{
         let formatter = DateFormatter()
-        formatter.dateFormat = DateFormatsForApp.dateTimeFormatterWithoutDay.rawValue
+        formatter.dateFormat = HelpfulDateFormats.dateTimeFormatterWithoutDay.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
     }
@@ -210,7 +211,7 @@ open class Formatter{
      - Returns: Date in 12Hrs Format.
      */
     static public func get12HrsTime(from date: Date) -> String{
-        let time = Formatter().get12HrsTimeFormattor().string(from: date)
+        let time = DateFormatterHelper().get12HrsTimeFormattor().string(from: date)
         return time
     }
     
@@ -221,13 +222,68 @@ open class Formatter{
      - Returns: Date in 24Hrs Format.
      */
     static public func get24HrsTime(from date: Date) -> String{
-        let time = Formatter().get24HrsTimeFormattor().string(from: date)
+        let time = DateFormatterHelper().get24HrsTimeFormattor().string(from: date)
         return time
     }
     
     /**
      convert string to given date
-     - Parameter format: enum type DateFormatsForApp for date format
+     - Parameter format: enum type HelpfulDateFormats for date format
+     - Parameter stringToConvert: string To Convert into date
+     - Parameter isUTC: is date is in UTC format
+     - Returns: return converted date, it may contains nil value.
+     */
+    static public func convertStringToDate(format: HelpfulDateFormats, stringToConvert: String, isUTC: Bool=false) -> Date?{
+        let formatter = DateFormatter()
+        formatter.dateFormat = format.rawValue
+        if isUTC{
+            formatter.timeZone = TimeZone(abbreviation: "UTC")
+        }else{
+            formatter.timeZone = TimeZone.current
+        }
+        if let date = formatter.date(from: stringToConvert){
+            return date
+        }else{
+            return nil
+        }
+    }
+    
+    
+    /**
+     convert date to string
+     - Parameter format: enum type HelpfulDateFormats for date format
+     - Parameter dateToConvert: date To Convert into string
+     - Parameter isUTC: is date is in UTC format
+     - Returns: return converted string.
+     */
+    static public func convertDateToString(format: HelpfulDateFormats, dateToConvert: Date, isUTC: Bool=false) -> String{
+        return convertDateToString(format: format.rawValue, dateToConvert: dateToConvert, isUTC: isUTC)
+    }
+    
+    /**
+     convert string of date to string which will viewable on screen
+     - Parameter format: enum type HelpfulDateFormats for date format
+     - Parameter formatToShow: enum type HelpfulDateFormats for date format which will viewable on screen
+     - Parameter stringToConvert: string To Convert into viewable date string
+     - Parameter isUTC: is date is in UTC format
+     - Returns: return converted string, it may contains nil value.
+     */
+    static public func convertStringToViewableString(format: HelpfulDateFormats, formatToShow: HelpfulDateFormats, stringToConvert: String, isUTC: Bool=false) -> String?{
+        return convertStringToViewableString(format: format.rawValue, formatToShow: formatToShow.rawValue, stringToConvert: stringToConvert, isUTC: isUTC)
+    }
+    
+    /**
+     get string date to viewable string for app with timeago
+     - Parameter string: string to convert viewable string
+     - Parameter showableFormat: enum type HelpfulDateFormats for date format which will viewable on screen
+     - Returns: return converted string, it may contains nil value.
+     */
+    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: HelpfulDateFormats) -> String?{
+        return getDateToShowableFormatWithTimeAgo(string: string, showableFormat: showableFormat.rawValue)
+    }
+    /**
+     convert string to given date
+     - Parameter format: enum type HelpfulDateFormats for date format
      - Parameter stringToConvert: string To Convert into date
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted date, it may contains nil value.
@@ -250,7 +306,7 @@ open class Formatter{
     
     /**
      convert date to string
-     - Parameter format: enum type DateFormatsForApp for date format
+     - Parameter format: enum type HelpfulDateFormats for date format
      - Parameter dateToConvert: date To Convert into string
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string.
@@ -268,14 +324,14 @@ open class Formatter{
     
     /**
      convert string of date to string which will viewable on screen
-     - Parameter format: enum type DateFormatsForApp for date format
-     - Parameter formatToShow: enum type DateFormatsForApp for date format which will viewable on screen
+     - Parameter format: enum type HelpfulDateFormats for date format
+     - Parameter formatToShow: enum type HelpfulDateFormats for date format which will viewable on screen
      - Parameter stringToConvert: string To Convert into viewable date string
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string, it may contains nil value.
      */
     static public func convertStringToViewableString(format: String, formatToShow: String, stringToConvert: String, isUTC: Bool=false) -> String?{
-        if let date = Formatter.convertStringToDate(format: format, stringToConvert: stringToConvert, isUTC: isUTC){
+        if let date = DateFormatterHelper.convertStringToDate(format: format, stringToConvert: stringToConvert, isUTC: isUTC){
             let formatter = DateFormatter()
             formatter.dateFormat = formatToShow
             formatter.timeZone = TimeZone.current
@@ -289,17 +345,17 @@ open class Formatter{
     /**
      get string date to viewable string for app with timeago
      - Parameter string: string to convert viewable string
-     - Parameter showableFormat: enum type DateFormatsForApp for date format which will viewable on screen
+     - Parameter showableFormat: enum type HelpfulDateFormats for date format which will viewable on screen
      - Returns: return converted string, it may contains nil value.
      */
     static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: String) -> String?{
         
-        if let date = Formatter.convertStringToDate(format: Formatter.DateFormatsForApp.utcDateTimeFormattor.rawValue,
+        if let date = DateFormatterHelper.convertStringToDate(format: HelpfulDateFormats.utcDateTimeFormattor.rawValue,
                                                     stringToConvert: string, isUTC: true){
-            let dateToShow = Formatter.convertStringToViewableString(format: Formatter.DateFormatsForApp.utcDateTimeFormattor.rawValue,
+            let dateToShow = DateFormatterHelper.convertStringToViewableString(format: HelpfulDateFormats.utcDateTimeFormattor.rawValue,
                                                                      formatToShow: showableFormat,
                                                                      stringToConvert: string) ?? ""
-            let timeAgo = Formatter.timeAgoSinceDate(date: date,
+            let timeAgo = DateFormatterHelper.timeAgoSinceDate(date: date,
                                                      currentDate: Date(), numericDates: false)
             return dateToShow + ", " + timeAgo
         }
