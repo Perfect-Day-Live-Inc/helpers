@@ -20,7 +20,7 @@ public enum LocationRequirement{
     case mandatory
     case non_Mandatory
 }
-
+//
 ///This Protocol is an delegation pattren implementation of "LocationManager" class
 public protocol LocationManagerDelegate {
     ///If location updates occurs this delegate will call
