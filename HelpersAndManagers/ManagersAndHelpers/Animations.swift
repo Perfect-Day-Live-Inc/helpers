@@ -22,7 +22,9 @@ open class Animations {
         case Deg180
     }
     
-    public func animateViewToAngle(viewToRotate view: UIView, angle: RotationAngle, repeated: Bool) {
+    public func animateViewToAngle(viewToRotate view: UIView,
+                                   angle: RotationAngle,
+                                   repeated: Bool) {
         let rotation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotation.fromValue = NSNumber(value: 0.0)
         let piFactor = Double.pi / 180

@@ -65,12 +65,12 @@ open class Helper{
                                   vc: UIViewController){
         
         var font = UIFont.systemFont(ofSize: 17)
-        if titleFontStyle == nil{
+        if titleFontStyle != nil{
             font = titleFontStyle!
         }
         
         var itemsFont = UIFont.systemFont(ofSize: 17)
-        if itemsFontStyle == nil{
+        if itemsFontStyle != nil{
             itemsFont = itemsFontStyle!
         }
         
@@ -170,7 +170,7 @@ open class Helper{
             alertController.addAction(alertAction)
         }
         DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alertController, animated: true, completion: nil)
             }
         }
@@ -219,7 +219,7 @@ open class Helper{
         vc.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(vc, animated: true, completion: nil)
             }
         }
@@ -319,7 +319,7 @@ open class Helper{
         }else if calendar.isDateInTomorrow(date){
             return "Tomorrow"
         }else{
-            return Formatter.getInstance.dateTimeFormatterWithDay().string(from: date)
+            return DateFormatterHelper.getInstance.dateTimeFormatterWithDay().string(from: date)
         }
     }
     
@@ -368,16 +368,22 @@ open class Helper{
     }
     
     ///show location disable alert
-    public func showLocationSettingsAlert(){
-        let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
+    public func showLocationSettingsAlert(isCancelBtnRequired: Bool=true){
+        let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
         let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" Detect that your application's location setting is disable, Please enable location service for better results.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Go to settings", style: .default) { (action) in
+        let action = UIAlertAction(title: "Go to Settings", style: .default) { (action) in
             Helper.getInstance.openAppSettings()
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(action)
+        if isCancelBtnRequired{
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(cancelAction)
+        }
         DispatchQueue.main.async{
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alert, animated: true, completion: nil)
             }
         }
@@ -385,19 +391,19 @@ open class Helper{
     
     ///show contact disable alert
     public func showContactSettingsAlert(){
-        let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
+        let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
         let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" Detect that your application's contact permission is disable. Kindly enable permission to find your friends.", preferredStyle: .alert)
         let cancelaction = UIAlertAction(title: "Cancel", style: .default) { (action) in
             alert.dismiss(animated: true, completion: nil)
         }
-        let action = UIAlertAction(title: "Go to settings", style: .default) { (action) in
+        let action = UIAlertAction(title: "Go to Settings", style: .default) { (action) in
             Helper.getInstance.openAppSettings()
             alert.dismiss(animated: true, completion: nil)
         }
-        alert.addAction(cancelaction)
         alert.addAction(action)
+        alert.addAction(cancelaction)
         DispatchQueue.main.async{
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(alert, animated: true, completion: nil)
             }
         }

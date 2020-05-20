@@ -14,7 +14,7 @@
 		77872F0422BCDE8E003F66FD /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFA22BCDE8E003F66FD /* AudioManager.swift */; };
 		77872F0522BCDE8E003F66FD /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFB22BCDE8E003F66FD /* Animations.swift */; };
 		77872F0622BCDE8E003F66FD /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFC22BCDE8E003F66FD /* MailComposer.swift */; };
-		77872F0722BCDE8E003F66FD /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFD22BCDE8E003F66FD /* Formatter.swift */; };
+		77872F0722BCDE8E003F66FD /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFD22BCDE8E003F66FD /* DateFormatterHelper.swift */; };
 		77872F0822BCDE8E003F66FD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFE22BCDE8E003F66FD /* Helper.swift */; };
 		77872F0922BCDE8E003F66FD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872EFF22BCDE8E003F66FD /* LocationManager.swift */; };
 		77872F0A22BCDE8E003F66FD /* TextFieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77872F0022BCDE8E003F66FD /* TextFieldManager.swift */; };
@@ -30,7 +30,7 @@
 		77872EFA22BCDE8E003F66FD /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		77872EFB22BCDE8E003F66FD /* Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		77872EFC22BCDE8E003F66FD /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
-		77872EFD22BCDE8E003F66FD /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		77872EFD22BCDE8E003F66FD /* DateFormatterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		77872EFE22BCDE8E003F66FD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		77872EFF22BCDE8E003F66FD /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		77872F0022BCDE8E003F66FD /* TextFieldManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldManager.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 				77872EFA22BCDE8E003F66FD /* AudioManager.swift */,
 				77872EFB22BCDE8E003F66FD /* Animations.swift */,
 				77872EFC22BCDE8E003F66FD /* MailComposer.swift */,
-				77872EFD22BCDE8E003F66FD /* Formatter.swift */,
+				77872EFD22BCDE8E003F66FD /* DateFormatterHelper.swift */,
 				77872EFE22BCDE8E003F66FD /* Helper.swift */,
 				77872EFF22BCDE8E003F66FD /* LocationManager.swift */,
 				77872F0022BCDE8E003F66FD /* TextFieldManager.swift */,
@@ -172,7 +172,7 @@
 				77872F0A22BCDE8E003F66FD /* TextFieldManager.swift in Sources */,
 				77872F0522BCDE8E003F66FD /* Animations.swift in Sources */,
 				77872F0222BCDE8E003F66FD /* DateTimePicker.swift in Sources */,
-				77872F0722BCDE8E003F66FD /* Formatter.swift in Sources */,
+				77872F0722BCDE8E003F66FD /* DateFormatterHelper.swift in Sources */,
 				77872F0422BCDE8E003F66FD /* AudioManager.swift in Sources */,
 				77872F0622BCDE8E003F66FD /* MailComposer.swift in Sources */,
 				77872F0322BCDE8E003F66FD /* PhoneContacts.swift in Sources */,

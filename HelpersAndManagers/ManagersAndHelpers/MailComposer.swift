@@ -10,6 +10,17 @@ import Foundation
 import Swift
 import MessageUI
 
+extension UIApplication {
+
+    class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+
+        if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
+    }
+}
+
 open class MailComposer : NSObject{
     
     private override init() {}
@@ -18,7 +29,7 @@ open class MailComposer : NSObject{
     var barTintColor : UIColor = .white
     var itemsColor : UIColor = .black
     
-    public func sendEmail(recipents: [String],
+    public func sendEmail(recipients: [String],
                           barTintColor: UIColor=UIColor.white,
                           itemsColor: UIColor=UIColor.black,
                           body: String) {
@@ -27,14 +38,14 @@ open class MailComposer : NSObject{
             self.itemsColor = itemsColor
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(recipents)
+            mail.setToRecipients(recipients)
             mail.setMessageBody(body, isHTML: true)
             
-            if let window = UIApplication.shared.delegate?.window{
-                if let rootV = window?.rootViewController{
-                    rootV.present(mail, animated: true, completion: nil)
-                }
+//            if let window = UIApplication.shared.delegate?.window{
+            if let rootV = UIApplication.getTopViewController(){
+                rootV.present(mail, animated: true, completion: nil)
             }
+//            }
         } else {
             // show failure alert
             Helper.getInstance.showAlert(title: "Alert", message: "Your device didn't configure email settings")

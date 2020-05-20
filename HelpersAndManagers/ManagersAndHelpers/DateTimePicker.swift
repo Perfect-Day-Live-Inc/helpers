@@ -95,7 +95,7 @@ open class DateTimePicker{
         pickerView.minimumDate = minimumDate
         pickerView.maximumDate = maximumDate
         
-        pickerView.locale = NSLocale(localeIdentifier: "\(Formatter.getInstance.getAppTimeFormat().rawValue)") as Locale
+        pickerView.locale = NSLocale(localeIdentifier: "\(DateFormatterHelper.getInstance.getAppTimeFormat().rawValue)") as Locale
         
         vc.view.addSubview(pickerView)
         alertCont.setValue(vc, forKey: "contentViewController")

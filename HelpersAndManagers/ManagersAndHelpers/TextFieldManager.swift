@@ -15,8 +15,11 @@ open class TextFieldManager : NSObject{
     
     public var isToolBarRequired = false
     private var textInputViews = [UIResponder]()
+    public var tintColor : UIColor = .blue
+    public var backgroundColor : UIColor = .gray
     
-    public func createToolBar(isLastField: Bool=false) -> UIToolbar{
+    private func createToolBar(isFirstField: Bool=false,
+                               isLastField: Bool=false) -> UIToolbar{
         let toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0,
                                                         width: UIScreen.main.bounds.width,
                                                         height: 45))
@@ -34,11 +37,20 @@ open class TextFieldManager : NSObject{
                                            style: UIBarButtonItem.Style.plain,
                                            target: self,
                                            action: #selector(nextBtnTapped))
-        toolBar.backgroundColor = .lightGray
+        toolBar.barTintColor = backgroundColor
+        previousBtn.tintColor = tintColor
+        nextBtn.tintColor = tintColor
         
-        toolBar.setItems([previousBtn,
-                          spacer,
-                          nextBtn], animated: true)
+        if isFirstField {
+            toolBar.setItems([spacer,
+                              nextBtn], animated: true)
+            
+        } else {
+            toolBar.setItems([previousBtn,
+                              spacer,
+                              nextBtn], animated: true)
+            
+        }
         
         return toolBar
     }
@@ -48,13 +60,14 @@ open class TextFieldManager : NSObject{
     /// - Parameters:
     ///   - textInputViewsArr: ARRAY OF TEXTFIELDS/ TEXTVIEWS.
     ///   - isToolBarRequired: INDICATES IF TOOLBAR IN TOP OF KEYBOARD IS REQUIRED OR NOT.
-    public func setTextFieldsWithDelegate(textInputViewsArr: [UIResponder],
+    public func setupTextFieldsAndTextViews(textInputViewsArr: [UIResponder],
                                           isToolBarRequired: Bool?=nil){
         self.textInputViews = textInputViewsArr
         self.isToolBarRequired = (isToolBarRequired == nil) ? self.isToolBarRequired : isToolBarRequired!
         self.textInputViews.forEach { (field) in
             if field.isKind(of: UITextField.self) || field.isKind(of: UITextView.self){
                 
+                let isFirstField = (field === self.textInputViews.first) ? true : false
                 let isLastField = (field === self.textInputViews.last) ? true : false
                 if field.isKind(of: UITextField.self){
                     let txtF = field as! UITextField
@@ -65,16 +78,16 @@ open class TextFieldManager : NSObject{
                         txtF.returnKeyType = .next
                     }
                     if self.isToolBarRequired{
-                        txtF.inputAccessoryView = self.createToolBar(isLastField: isLastField)
+                        txtF.inputAccessoryView = self.createToolBar(isFirstField: isFirstField, isLastField: isLastField)
                     }
                     
                     if !self.isToolBarRequired &&
                         (txtF.keyboardType == .numberPad || txtF.keyboardType == .phonePad || txtF.keyboardType == .numbersAndPunctuation || txtF.keyboardType == .decimalPad){
-                        txtF.inputAccessoryView = self.createToolBar(isLastField: isLastField)
+                        txtF.inputAccessoryView = self.createToolBar(isFirstField: isFirstField, isLastField: isLastField)
                     }
                 }else{
                     let txtF = field as! UITextView
-                    txtF.inputAccessoryView = self.createToolBar(isLastField: isLastField)
+                    txtF.inputAccessoryView = self.createToolBar(isFirstField: isFirstField, isLastField: isLastField)
                 }
                 
             }else{
@@ -84,7 +97,7 @@ open class TextFieldManager : NSObject{
         
     }
     
-    func convertResponderToTextInput(view: UIResponder) -> UITextInput{
+    private func convertResponderToTextInput(view: UIResponder) -> UITextInput{
         if view.isKind(of: UITextField.self){
             return view as! UITextField
         }else{
@@ -92,7 +105,7 @@ open class TextFieldManager : NSObject{
         }
     }
     
-    @objc func nextBtnTapped(){
+    @objc private func nextBtnTapped(){
         let currFieldIndex =  self.textInputViews.firstIndex { (field) -> Bool in
             return field.isFirstResponder
         }
@@ -110,7 +123,7 @@ open class TextFieldManager : NSObject{
                              isNextAction: true)
     }
     
-    func updateInputView(_ currFieldIndex: Int, isNextAction: Bool=true){
+    private func updateInputView(_ currFieldIndex: Int, isNextAction: Bool=true){
         
         var nextORPreviousIndex = currFieldIndex + 1
         if !isNextAction{
@@ -159,7 +172,7 @@ open class TextFieldManager : NSObject{
         }
     }
     
-    @objc func previousBtnTapped(){
+    @objc private func previousBtnTapped(){
         let currFieldIndex =  self.textInputViews.firstIndex { (field) -> Bool in
             return field.isFirstResponder
         }
@@ -176,7 +189,7 @@ open class TextFieldManager : NSObject{
                              isNextAction: false)
     }
     
-    @objc func TextFieldsUpdate(){
+    @objc private func TextFieldsUpdate(){
         self.nextBtnTapped()
     }
 }
