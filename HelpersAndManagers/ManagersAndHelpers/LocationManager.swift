@@ -177,7 +177,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     
     ///This function will get address from location
     /// - parameter location: pass the location by which you want to get address
-    func getAddressFromLatLong(location: CLLocation){
+    public func getAddressFromLatLong(location: CLLocation){
         
         CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) in
             if error != nil{
@@ -209,7 +209,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
 extension CLPlacemark {
     
     ///this string will contains street name city name and country name in a single string
-    var compactAddress: String? {
+    public var compactAddress: String? {
         if let name = name {
             var result = name
             
