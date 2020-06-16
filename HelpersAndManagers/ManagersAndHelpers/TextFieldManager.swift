@@ -114,8 +114,8 @@ open class TextFieldManager : NSObject{
         }
         
         let currField = self.textInputViews[currFieldIndex!]
-        currField.resignFirstResponder()
         if self.textInputViews.count <= currFieldIndex! + 1{
+            currField.resignFirstResponder()
             return
         }
         
@@ -181,8 +181,8 @@ open class TextFieldManager : NSObject{
         }
         
         let currField = self.textInputViews[currFieldIndex!]
-        currField.resignFirstResponder()
         if self.textInputViews.count <= currFieldIndex! - 1{
+            currField.resignFirstResponder()
             return
         }
         self.updateInputView(currFieldIndex!,
