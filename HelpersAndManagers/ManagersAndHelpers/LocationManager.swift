@@ -162,6 +162,9 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if error.localizedDescription == "The operation couldn’t be completed. (kCLErrorDomain error 1.)"{
             self.showLocationSettingsAlert()
+            if self.delegate != nil{
+                delegate!.locationUpdateFailed(withError: error.localizedDescription)
+            }
         }else{
             if managerStatus != .requestAlways{
                 LocationManager.manager.stopUpdatingLocation()
