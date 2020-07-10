@@ -34,12 +34,27 @@ public enum HelpfulDateFormats : String{
     case dayOfWeek = "EEEE"
 }
 
+
+
+class DateFormat : DateFormatter{
+    override init() {
+        super.init()
+        self.locale = Locale(identifier: "en_US_POSIX")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.locale = Locale(identifier: "en_US_POSIX")
+    }
+}
+
 ///this class contains time formats which are use in whole application
 open class DateFormatterHelper{
     
     
     private var appTimeFormat : timeFormat = .Hrs24
 
+    public var isUSOnlyPOSIX : Bool = false
     private init() {}
     static public let getInstance = DateFormatterHelper()
 
@@ -58,7 +73,7 @@ open class DateFormatterHelper{
     ///this function returns time format "14:15:20"
     /// - Returns: Date Formatter
     public func getOnlyTimeWithSecond() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.onlyTimeWithSecond.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -67,7 +82,7 @@ open class DateFormatterHelper{
     ///this function returns time format "10 Sept 2020, 11:10 am"
     /// - Returns: Date Formatter
     public func getfullDateComaAndTime() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.fullDateComaAndTime.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -76,7 +91,7 @@ open class DateFormatterHelper{
     ///this function returns time format "2019-09"
     /// - Returns: Date Formatter
     public func onlyYearAndMonthFirstYear() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.onlyYearAndMonthFirstYear.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -85,7 +100,7 @@ open class DateFormatterHelper{
     ///this function returns time format "September 2013"
     /// - Returns: Date Formatter
     public func onlyYearAndMonthFirstMonth() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.onlyYearAndMonthFirstMonth.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -94,7 +109,7 @@ open class DateFormatterHelper{
     ///this function returns time format "2019-10-10 13:15:20"
     /// - Returns: Date Formatter
     public func getUTCDateTimeFormattor() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.utcDateTimeFormattor.rawValue
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         return formatter
@@ -103,7 +118,7 @@ open class DateFormatterHelper{
     ///this function returns time format "2019-10-10"
     /// - Returns: Date Formatter
     public func getOnlyDateFormattor() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.onlyDateFormattor.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -112,7 +127,7 @@ open class DateFormatterHelper{
     ///this function returns time format "May 10, 1996"
     /// - Returns: Date Formatter
     public func monthThenDayThenYear() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.monthThenDayThenYear.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -121,7 +136,7 @@ open class DateFormatterHelper{
     ///this function returns time format "May"
     /// - Returns: Date Formatter
     public func getDayOfWeek() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.dayOfWeek.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -130,7 +145,7 @@ open class DateFormatterHelper{
     ///this function returns time format "Jun 10, 2019 | 15:15 am"
     /// - Returns: Date Formatter
     public func monthThenDayThenYearAndTime() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.monthThenDayThenYearAndTime.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -139,7 +154,7 @@ open class DateFormatterHelper{
     ///this function returns time format "Monday, May 13, 2019"
     /// - Returns: Date Formatter
     public func dateTimeFormatterWithDay() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.dateTimeFormatterWithDay.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -148,7 +163,7 @@ open class DateFormatterHelper{
     ///this function returns time format in only 12hrs format
     /// - Returns: Date Formatter
     public func get12HrsTimeFormattor() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.TimeFormattor12Hrs.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -157,7 +172,7 @@ open class DateFormatterHelper{
     ///this function returns time format in only 24hrs format
     /// - Returns: Date Formatter
     public func get24HrsTimeFormattor() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.TimeFormattor24Hrs.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -166,7 +181,7 @@ open class DateFormatterHelper{
     ///this function returns time format "10 May 2019"
     /// - Returns: Date Formatter
     public func getAppDateFormattor() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.dateFormattor.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -175,7 +190,7 @@ open class DateFormatterHelper{
     ///this function returns Date Format with comma style e.g: 22, Jan, 2018
     /// - Returns: Date Formatter
     public func getAppDateFormattorWithComma() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.dateFormattorWithComma.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -184,7 +199,7 @@ open class DateFormatterHelper{
     ///this function returns time format "10 Sept, 17:15"
     /// - Returns: Date Formatter
     public func dateTimeFormatterWithoutDay() -> DateFormatter{
-        let formatter = DateFormatter()
+        let formatter = (isUSOnlyPOSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = HelpfulDateFormats.dateTimeFormatterWithoutDay.rawValue
         formatter.timeZone = TimeZone.current
         return formatter
@@ -233,8 +248,8 @@ open class DateFormatterHelper{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted date, it may contains nil value.
      */
-    static public func convertStringToDate(format: HelpfulDateFormats, stringToConvert: String, isUTC: Bool=false) -> Date?{
-        let formatter = DateFormatter()
+    static public func convertStringToDate(format: HelpfulDateFormats, stringToConvert: String, isUTC: Bool=false, isUS_POSIX: Bool=false) -> Date?{
+        let formatter = (isUS_POSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = format.rawValue
         if isUTC{
             formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -288,8 +303,8 @@ open class DateFormatterHelper{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted date, it may contains nil value.
      */
-    static public func convertStringToDate(format: String, stringToConvert: String, isUTC: Bool=false) -> Date?{
-        let formatter = DateFormatter()
+    static public func convertStringToDate(format: String, stringToConvert: String, isUTC: Bool=false, isUS_POSIX: Bool=false) -> Date?{
+        let formatter = (isUS_POSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = format
         if isUTC{
             formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -311,8 +326,8 @@ open class DateFormatterHelper{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string.
      */
-    static public func convertDateToString(format: String, dateToConvert: Date, isUTC: Bool=false) -> String{
-        let formatter = DateFormatter()
+    static public func convertDateToString(format: String, dateToConvert: Date, isUTC: Bool=false, isUS_POSIX: Bool=false) -> String{
+        let formatter = (isUS_POSIX) ? DateFormat() : DateFormatter()
         formatter.dateFormat = format
         if isUTC{
             formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -330,9 +345,9 @@ open class DateFormatterHelper{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string, it may contains nil value.
      */
-    static public func convertStringToViewableString(format: String, formatToShow: String, stringToConvert: String, isUTC: Bool=false) -> String?{
+    static public func convertStringToViewableString(format: String, formatToShow: String, stringToConvert: String, isUTC: Bool=false, isUS_POSIX: Bool=false) -> String?{
         if let date = DateFormatterHelper.convertStringToDate(format: format, stringToConvert: stringToConvert, isUTC: isUTC){
-            let formatter = DateFormatter()
+            let formatter = (isUS_POSIX) ? DateFormat() : DateFormatter()
             formatter.dateFormat = formatToShow
             formatter.timeZone = TimeZone.current
             let strDate = formatter.string(from: date)
