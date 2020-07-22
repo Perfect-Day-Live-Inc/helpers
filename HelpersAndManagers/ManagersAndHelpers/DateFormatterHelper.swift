@@ -1,6 +1,6 @@
 //
 //  Formatter.swift
-//  
+//
 //
 //  Created by MacBook Retina on 10/25/17.
 //  Copyright © 2017 Appiskey. All rights reserved.
@@ -40,11 +40,15 @@ class DateFormat : DateFormatter{
     override init() {
         super.init()
         self.locale = Locale(identifier: "en_US_POSIX")
+        self.amSymbol = "AM"
+        self.pmSymbol = "PM"
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.locale = Locale(identifier: "en_US_POSIX")
+        self.amSymbol = "AM"
+        self.pmSymbol = "PM"
     }
 }
 
@@ -271,8 +275,8 @@ open class DateFormatterHelper{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string.
      */
-    static public func convertDateToString(format: HelpfulDateFormats, dateToConvert: Date, isUTC: Bool=false) -> String{
-        return convertDateToString(format: format.rawValue, dateToConvert: dateToConvert, isUTC: isUTC)
+    static public func convertDateToString(format: HelpfulDateFormats, dateToConvert: Date, isUTC: Bool=false, isUS_POSIX: Bool=false) -> String{
+        return convertDateToString(format: format.rawValue, dateToConvert: dateToConvert, isUTC: isUTC, isUS_POSIX: isUS_POSIX)
     }
     
     /**
@@ -283,8 +287,8 @@ open class DateFormatterHelper{
      - Parameter isUTC: is date is in UTC format
      - Returns: return converted string, it may contains nil value.
      */
-    static public func convertStringToViewableString(format: HelpfulDateFormats, formatToShow: HelpfulDateFormats, stringToConvert: String, isUTC: Bool=false) -> String?{
-        return convertStringToViewableString(format: format.rawValue, formatToShow: formatToShow.rawValue, stringToConvert: stringToConvert, isUTC: isUTC)
+    static public func convertStringToViewableString(format: HelpfulDateFormats, formatToShow: HelpfulDateFormats, stringToConvert: String, isUTC: Bool=false, isUS_POSIX: Bool=false) -> String?{
+        return convertStringToViewableString(format: format.rawValue, formatToShow: formatToShow.rawValue, stringToConvert: stringToConvert, isUTC: isUTC, isUS_POSIX: isUS_POSIX)
     }
     
     /**
@@ -293,8 +297,8 @@ open class DateFormatterHelper{
      - Parameter showableFormat: enum type HelpfulDateFormats for date format which will viewable on screen
      - Returns: return converted string, it may contains nil value.
      */
-    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: HelpfulDateFormats) -> String?{
-        return getDateToShowableFormatWithTimeAgo(string: string, showableFormat: showableFormat.rawValue)
+    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: HelpfulDateFormats, isUS_POSIX: Bool=false) -> String?{
+        return getDateToShowableFormatWithTimeAgo(string: string, showableFormat: showableFormat.rawValue, isUS_POSIX: isUS_POSIX)
     }
     /**
      convert string to given date
@@ -346,7 +350,7 @@ open class DateFormatterHelper{
      - Returns: return converted string, it may contains nil value.
      */
     static public func convertStringToViewableString(format: String, formatToShow: String, stringToConvert: String, isUTC: Bool=false, isUS_POSIX: Bool=false) -> String?{
-        if let date = DateFormatterHelper.convertStringToDate(format: format, stringToConvert: stringToConvert, isUTC: isUTC){
+        if let date = DateFormatterHelper.convertStringToDate(format: format, stringToConvert: stringToConvert, isUTC: isUTC, isUS_POSIX: isUS_POSIX){
             let formatter = (isUS_POSIX) ? DateFormat() : DateFormatter()
             formatter.dateFormat = formatToShow
             formatter.timeZone = TimeZone.current
@@ -363,13 +367,13 @@ open class DateFormatterHelper{
      - Parameter showableFormat: enum type HelpfulDateFormats for date format which will viewable on screen
      - Returns: return converted string, it may contains nil value.
      */
-    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: String) -> String?{
+    static public func getDateToShowableFormatWithTimeAgo(string: String, showableFormat: String, isUS_POSIX: Bool=false) -> String?{
         
         if let date = DateFormatterHelper.convertStringToDate(format: HelpfulDateFormats.utcDateTimeFormattor.rawValue,
-                                                    stringToConvert: string, isUTC: true){
+                                                    stringToConvert: string, isUTC: true, isUS_POSIX: isUS_POSIX){
             let dateToShow = DateFormatterHelper.convertStringToViewableString(format: HelpfulDateFormats.utcDateTimeFormattor.rawValue,
                                                                      formatToShow: showableFormat,
-                                                                     stringToConvert: string) ?? ""
+                                                                     stringToConvert: string, isUS_POSIX: isUS_POSIX) ?? ""
             let timeAgo = DateFormatterHelper.timeAgoSinceDate(date: date,
                                                      currentDate: Date(), numericDates: false)
             return dateToShow + ", " + timeAgo
