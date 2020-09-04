@@ -107,6 +107,9 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     ///show location disable alert
     func showLocationSettingsAlert(){
         let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
+        if self.delegate != nil{
+            delegate!.locationUpdateFailed(withError: "\"\(appDisplayName)\" detects that your application's location setting is disable.")
+        }
         let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" detects that your application's location setting is disable, Please enable location service for better results.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Go to Settings", style: .default) { (action) in
             Helper.getInstance.openAppSettings()
@@ -162,9 +165,6 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if error.localizedDescription == "The operation couldn’t be completed. (kCLErrorDomain error 1.)"{
             self.showLocationSettingsAlert()
-            if self.delegate != nil{
-                delegate!.locationUpdateFailed(withError: error.localizedDescription)
-            }
         }else{
             if managerStatus != .requestAlways{
                 LocationManager.manager.stopUpdatingLocation()
