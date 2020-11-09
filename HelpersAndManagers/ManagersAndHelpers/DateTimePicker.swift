@@ -76,12 +76,18 @@ open class DateTimePicker{
                                       completion: ((Date?)->Void)?){
         
         let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250,height: 150)
-        let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 150))
         
         var alertCont = UIAlertController(title: "Choose Time",
                                           message: "",
                                           preferredStyle: UIAlertController.Style.alert)
+        
+        
+        vc.preferredContentSize = CGSize(width: alertCont.view.bounds.width * 0.7,
+                                         height: 150)
+        let pickerView = UIDatePicker(frame: CGRect(x: 0,
+                                                    y: 0,
+                                                    width: alertCont.view.bounds.width * 0.7,
+                                                    height: 150))
         pickerView.datePickerMode = .time
         if selectedDateTime != nil{
             pickerView.date = selectedDateTime!
