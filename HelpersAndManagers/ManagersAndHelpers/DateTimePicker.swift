@@ -75,19 +75,14 @@ open class DateTimePicker{
                                       selectedDateTime: Date?=nil,
                                       completion: ((Date?)->Void)?){
         
-        let vc = UIViewController()
         
         var alertCont = UIAlertController(title: "Choose Time",
                                           message: "",
-                                          preferredStyle: UIAlertController.Style.alert)
+                                          preferredStyle: UIAlertController.Style.actionSheet)
         
+        let pickerView = UIDatePicker()
+        let vc = UIViewController()
         
-        vc.preferredContentSize = CGSize(width: alertCont.view.bounds.width * 0.7,
-                                         height: 150)
-        let pickerView = UIDatePicker(frame: CGRect(x: 0,
-                                                    y: 0,
-                                                    width: alertCont.view.bounds.width * 0.7,
-                                                    height: 150))
         pickerView.datePickerMode = .time
         if selectedDateTime != nil{
             pickerView.date = selectedDateTime!
@@ -96,14 +91,20 @@ open class DateTimePicker{
             pickerView.datePickerMode = .date
             alertCont = UIAlertController(title: "Choose Date",
                                           message: "",
-                                          preferredStyle: UIAlertController.Style.alert)
+                                          preferredStyle: UIAlertController.Style.actionSheet)
         }
         pickerView.minimumDate = minimumDate
         pickerView.maximumDate = maximumDate
         
+        if #available(iOS 13.4, *) {
+            pickerView.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        }
+        
         pickerView.locale = NSLocale(localeIdentifier: "\(DateFormatterHelper.getInstance.getAppTimeFormat().rawValue)") as Locale
         
         vc.view.addSubview(pickerView)
+        pickerView.frame = CGRect.init(x: 0, y: 0, width: alertCont.view.bounds.width, height: 100)
+        
         alertCont.setValue(vc, forKey: "contentViewController")
         let setAction = UIAlertAction(title: "Select", style: .default) { (action) in
             if self.datePickerDelegate != nil{
