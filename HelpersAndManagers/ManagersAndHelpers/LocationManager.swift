@@ -74,13 +74,11 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
      **/
     public func gettingLocation(delegateVC: LocationManagerDelegate?=nil, managerStatus: LocationAuthorization? = nil){
         
-        if managerStatus != nil{
-            self.managerStatus = managerStatus!
+        if let status = managerStatus{
+            self.managerStatus = status
         }
         LocationManager.currentLocation = LocationManager.manager.location
-        if delegateVC != nil{
-            self.delegate = delegateVC
-        }
+        self.delegate = delegateVC
         
         let authorizationStatus = CLLocationManager.authorizationStatus()
         switch authorizationStatus {
@@ -107,9 +105,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     ///show location disable alert
     func showLocationSettingsAlert(){
         let appDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? ""
-        if self.delegate != nil{
-            delegate!.locationUpdateFailed(withError: "\"\(appDisplayName)\" detects that your application's location setting is disable.")
-        }
+        delegate?.locationUpdateFailed(withError: "\"\(appDisplayName)\" detects that your application's location setting is disable.")
         let alert = UIAlertController(title: "Alert", message: "\"\(appDisplayName)\" detects that your application's location setting is disable, Please enable location service for better results.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Go to Settings", style: .default) { (action) in
             Helper.getInstance.openAppSettings()
@@ -148,14 +144,13 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
         if managerStatus != .requestAlways{
             LocationManager.manager.stopUpdatingLocation()
         }
-        if locations.count != 0{
-            let location = locations.last
+        if let location = locations.last{
             LocationManager.currentLocation = location
             if self.addressRequired {
-                self.getAddressFromLatLong(location: location!)
+                self.getAddressFromLatLong(location: location)
             } else {
-                self.delegate!.locationUpdate(latitude: location!.coordinate.latitude,
-                                              longitude: location!.coordinate.longitude,
+                self.delegate?.locationUpdate(latitude: location.coordinate.latitude,
+                                              longitude: location.coordinate.longitude,
                                               address: "")
             }
             
@@ -169,9 +164,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
             if managerStatus != .requestAlways{
                 LocationManager.manager.stopUpdatingLocation()
             }
-            if self.delegate != nil{
-                delegate!.locationUpdateFailed(withError: error.localizedDescription)
-            }
+            delegate?.locationUpdateFailed(withError: error.localizedDescription)
         }
     }
     //------------------------------------------------------------------------------------------------------//
@@ -185,23 +178,17 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
         CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) in
             if error != nil{
                 LocationManager.currentLocationAddress = ""
-                if self.delegate != nil{
-                    self.delegate!.locationUpdate(latitude: location.coordinate.latitude,
-                                                  longitude: location.coordinate.longitude,
-                                                  address: "")
-                }
+                self.delegate?.locationUpdate(latitude: location.coordinate.latitude,
+                                              longitude: location.coordinate.longitude,
+                                              address: "")
             }else {
                 
-                let place = placemark! as [CLPlacemark]
-                if place.count > 0 {
-                    let place = placemark![0]
-                    let adressString : String = place.compactAddress ?? ""
+                if let place = placemark, let firstPlace = place.first {
+                    let adressString : String = firstPlace.name ?? firstPlace.compactAddress ?? ""
                     LocationManager.currentLocationAddress = adressString
-                    if self.delegate != nil{
-                        self.delegate!.locationUpdate(latitude: location.coordinate.latitude,
-                                                      longitude: location.coordinate.longitude,
-                                                      address: adressString)
-                    }
+                    self.delegate?.locationUpdate(latitude: location.coordinate.latitude,
+                                                  longitude: location.coordinate.longitude,
+                                                  address: adressString)
                 }
             }
         }
