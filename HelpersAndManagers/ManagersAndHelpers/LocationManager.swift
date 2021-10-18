@@ -78,7 +78,10 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
             self.managerStatus = status
         }
         LocationManager.currentLocation = LocationManager.manager.location
-        self.delegate = delegateVC
+        
+        if delegateVC != nil{
+            self.delegate = delegateVC
+        }
         
         let authorizationStatus = CLLocationManager.authorizationStatus()
         switch authorizationStatus {
