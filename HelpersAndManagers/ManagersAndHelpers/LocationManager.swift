@@ -10,7 +10,6 @@ import Foundation
 import CoreLocation
 import UIKit
 
-
 public enum LocationAuthorization{
     case requestOnce
     case requestAlways
