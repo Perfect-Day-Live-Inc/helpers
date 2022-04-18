@@ -53,6 +53,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     private static var currentLocationAddress = ""
     
     private var addressRequired = false
+    private var instantlyShowSettingsDialogWhenUserDenies = false
     
     ///"private" function to get Permissions of locations from user
     private func settingDelegateToSelf(){
@@ -161,7 +162,7 @@ open class LocationManager : NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if error.localizedDescription == "The operation couldn’t be completed. (kCLErrorDomain error 1.)"{
+        if self.instantlyShowSettingsDialogWhenUserDenies, error.localizedDescription == "The operation couldn’t be completed. (kCLErrorDomain error 1.)"{
             self.showLocationSettingsAlert()
         }else{
             if managerStatus != .requestAlways{
