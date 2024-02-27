@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Helpers"
-  s.version      = "3.3.2"
+  s.version      = "3.3.3"
   s.summary      = "A short description of Helpers. and i will use these file for my new projects."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://gitlab.com/ahmedcs1/helpers.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/Perfect-Day-Live-Inc/helpers.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
