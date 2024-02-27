@@ -126,8 +126,8 @@ open class Helper{
     
     ///set specific view controller as root
     public func makeSpecificViewRoot(vc: UIViewController){
-        var snapshot:UIView!
-        let rootVC : UIViewController!
+        var snapshot: UIView?
+        var rootVC: UIViewController?
         
         rootVC = vc
         DispatchQueue.main.async {
