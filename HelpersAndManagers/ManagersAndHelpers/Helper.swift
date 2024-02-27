@@ -131,15 +131,21 @@ open class Helper{
         
         rootVC = vc
         DispatchQueue.main.async {
-            snapshot = (UIApplication.shared.keyWindow?.snapshotView(afterScreenUpdates: true))!
-            rootVC.view.addSubview(snapshot);
-            
-            UIApplication.shared.keyWindow?.rootViewController = rootVC;
-            UIView.transition(with: snapshot, duration: 0.4, options: .transitionCrossDissolve, animations: {
-                snapshot.layer.opacity = 0;
-            }, completion: { (status) in
-                snapshot.removeFromSuperview()
-            })
+            snapshot = (UIApplication.shared.windows.first(where: \.isKeyWindow)?.snapshotView(afterScreenUpdates: true))
+            if let snapshot, let rootVC {
+                rootVC.view.addSubview(snapshot);
+                UIApplication.shared.windows.first(where: \.isKeyWindow)?.rootViewController = rootVC;
+                UIView.transition(with: snapshot, duration: 0.4, options: .transitionCrossDissolve, animations: {
+                    snapshot.layer.opacity = 0;
+                }, completion: { (status) in
+                    snapshot.removeFromSuperview()
+                })
+            } else {
+                print("🔥 No snapshot found, try to apply root anyway")
+                if let rootVC {
+                    UIApplication.shared.windows.first(where: \.isKeyWindow)?.rootViewController = rootVC;
+                }
+            }
         }
     }
     
