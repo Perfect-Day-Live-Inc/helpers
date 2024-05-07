@@ -501,27 +501,4 @@ open class Helper{
         return Double(Double(resultCount)/Double(totalCount)) * 100
     }
     
-    public func setRememberMeIDPass(idStr: String, passStr: String){
-        UserDefaults.standard.setValue(idStr, forKey: "RememberID")
-        UserDefaults.standard.setValue(passStr, forKey: "RememberPass")
-    }
-    
-    public func removeRememberMeIDPass(){
-        UserDefaults.standard.setValue("", forKey: "RememberID")
-        UserDefaults.standard.setValue("", forKey: "RememberPass")
-    }
-    
-    public func getRememberMeIDPass() -> Dictionary<String, String>?{
-        var dic : [String: String]? = nil
-        if let num = UserDefaults.standard.string(forKey: "RememberID") {
-            dic = [:]
-            dic!["Id"] = num
-            if let pass = UserDefaults.standard.string(forKey: "RememberPass") {
-                dic!["pass"] = pass
-                return dic!
-            }
-        }
-        return nil
-    }
-    
 }
